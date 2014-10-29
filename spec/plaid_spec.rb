@@ -18,6 +18,11 @@ describe Plaid, 'Call' do
     expect(place[:code]).to eq(200)
   end
 
+  it 'calls get_institutions and returns an array of institutions with id, name and type etc' do
+    institutions = Plaid.call.get_institutions
+    expect(institutions).to all( include("id", "name", "type") )
+  end
+
   it 'returns a response code of 201' do
     Plaid.call.add_account_auth('chase','plaid_test','plaid_good','test@plaid.com')
   end
